@@ -19,14 +19,26 @@ public:
     ~MainWindow();
 
 protected:
-    virtual void mousePressEvent(QMouseEvent *e);
-    virtual void mouseMoveEvent(QMouseEvent *e);
-    virtual void mouseReleaseEvent(QMouseEvent *e);
+    virtual void mousePressEvent(QMouseEvent *e) override;
+    virtual void mouseMoveEvent(QMouseEvent *e) override;
+    virtual void mouseReleaseEvent(QMouseEvent *e) override;
+    virtual void contextMenuEvent(QContextMenuEvent *e) override;
 
 private:
     Ui::MainWindow *ui;
 
+    // drag
     QPoint startPos;
     bool isMoving = false;
+
+    // menu
+    QMenu* contextMenu;
+    QAction* action_closeNotch;
+    QAction* action_findPosition;
+    QAction* action_myInfo;
+    QAction* action_currVersion;
+    QAction* action_checkUpdate;
+    void initMenu();
+    void findPosition();
 };
 #endif // MAINWINDOW_H
