@@ -7,14 +7,13 @@
 #include <QDesktopWidget>
 
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
+    : QMainWindow(parent, Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint)
     , ui(new Ui::MainWindow)
 {
+    setAttribute(Qt::WA_TranslucentBackground);
     ui->setupUi(this);
-    this->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint);
-    QBitmap bitmap(width(), height());
-    QPainter painter(&bitmap);
-    painter.drawPixmap(geometry(), QPixmap(":/bg/res/notch.png"));
+    QBitmap bitmap = QPixmap(":/bg/res/notch.png").mask();
+    bitmap = bitmap.scaled(width(), height(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
     setMask(bitmap);
     int screenWidth = QApplication::desktop()->width();
     move((screenWidth - width()) / 2, 0);
