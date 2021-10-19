@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/bg">
+        <file>res/notch.png</file>
+    </qresource>
+</RCC>
