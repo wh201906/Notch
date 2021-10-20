@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QSettings>
 
 QT_BEGIN_NAMESPACE
 namespace Ui
@@ -24,21 +25,35 @@ protected:
     virtual void mouseReleaseEvent(QMouseEvent *e) override;
     virtual void contextMenuEvent(QContextMenuEvent *e) override;
 
+private slots:
+    void setWindowSize(const QSize& size);
+    void setWindowSize();  // use parameters in settings
+    void setPositionFixed(bool isFixed);
+    void setPositionFixed(); // use parameters in settings
 private:
     Ui::MainWindow *ui;
 
     // drag
     QPoint startPos;
     bool isMoving = false;
+    bool positionFixed = false;
 
     // menu
     QMenu* contextMenu;
     QAction* action_closeNotch;
     QAction* action_findPosition;
+    QAction* action_settings;
     QAction* action_myInfo;
     QAction* action_currVersion;
     QAction* action_checkUpdate;
+
+    // settings
+    QSettings* settings;
+
+    // helper functions
     void initMenu();
     void findPosition();
+    void reshape();
+    void loadSettings();
 };
 #endif // MAINWINDOW_H
