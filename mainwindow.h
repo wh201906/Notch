@@ -30,6 +30,8 @@ private slots:
     void setWindowSize();  // use parameters in settings
     void setPositionFixed(bool isFixed);
     void setPositionFixed(); // use parameters in settings
+    void setCornerSize(double ratio);
+    void setCornerSize();
 private:
     Ui::MainWindow *ui;
 

@@ -29,7 +29,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 RESOURCES += \
     background.qrc
 
-VERSION = 0.1.0
+VERSION = 0.1.1
 QMAKE_TARGET_PRODUCT = "Notch"
 QMAKE_TARGET_DESCRIPTION = "Notch"
 QMAKE_TARGET_COMPANY = "wh201906"

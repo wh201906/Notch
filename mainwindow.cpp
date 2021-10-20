@@ -48,6 +48,7 @@ void MainWindow::initMenu()
     {
         SettingsDialog dialog(settings);
         connect(&dialog, &SettingsDialog::setWindowSize, this, QOverload<>::of(&MainWindow::setWindowSize));
+        connect(&dialog, &SettingsDialog::setCornerSize, this, QOverload<>::of(&MainWindow::setCornerSize));
         connect(&dialog, &SettingsDialog::setPositionFixed, this, QOverload<>::of(&MainWindow::setPositionFixed));
         dialog.exec();
     });
@@ -74,9 +75,7 @@ void MainWindow::initMenu()
 
 void MainWindow::reshape()
 {
-    QBitmap bitmap = QPixmap(":/bg/res/notch.png").mask();
-    bitmap = bitmap.scaled(width(), height(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
-    setMask(bitmap);
+    setCornerSize();
 }
 
 void MainWindow::findPosition()
@@ -125,7 +124,7 @@ void MainWindow::setWindowSize(const QSize& size)
 void MainWindow::setWindowSize()
 {
     int size = settings->value("WindowSize").toInt();
-    int ratio = settings->value("WindowRatio").toInt();
+    double ratio = settings->value("WindowRatio").toDouble();
     QSize windowSize(size * ratio * 5, size * 5);
     setWindowSize(windowSize);
 }
@@ -144,16 +143,53 @@ void MainWindow::loadSettings()
 {
     // default settings is defined there
     int defaultWindowSize = 8;
-    int deaultWindowRatio = 6;
+    double deaultWindowRatio = 6.0;
+    double defaultCornerRatio = 0.25;
     bool PositionFixed = false;
     if(settings->value("WindowSize").isNull())
         settings->setValue("WindowSize", defaultWindowSize);
     if(settings->value("WindowRatio").isNull())
         settings->setValue("WindowRatio", deaultWindowRatio);
+    if(settings->value("CornerRatio").isNull())
+        settings->setValue("CornerRatio", defaultCornerRatio);
     if(settings->value("PositionFixed").isNull())
         settings->setValue("PositionFixed", PositionFixed);
 
     // init by settings
     setWindowSize();
     setPositionFixed();
+    setCornerSize();
+}
+
+void MainWindow::setCornerSize(double ratio)
+{
+    int size = ratio * height();
+    QBitmap bitmap;
+
+    ui->TLwidget->setFixedHeight(size);
+    ui->TLwidget->setFixedWidth(size);
+    bitmap = QPixmap(":/bg/res/tl.png").mask();
+    ui->TLwidget->setMask(bitmap.scaled(ui->TLwidget->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
+
+    ui->TRwidget->setFixedHeight(size);
+    ui->TRwidget->setFixedWidth(size);
+    bitmap = QPixmap(":/bg/res/tr.png").mask();
+    ui->TRwidget->setMask(bitmap.scaled(ui->TRwidget->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
+
+    ui->BLwidget->setFixedHeight(size);
+    ui->BLwidget->setFixedWidth(size * 2);
+    bitmap = QPixmap(":/bg/res/bl.png").mask();
+    ui->BLwidget->setMask(bitmap.scaled(ui->BLwidget->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
+
+    ui->BRwidget->setFixedHeight(size);
+    ui->BRwidget->setFixedWidth(size * 2);
+    bitmap = QPixmap(":/bg/res/br.png").mask();
+    ui->BRwidget->setMask(bitmap.scaled(ui->BRwidget->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
+
+    ui->Bwidget->setFixedHeight(size);
+}
+
+void MainWindow::setCornerSize()
+{
+    setCornerSize(settings->value("CornerRatio").toDouble());
 }

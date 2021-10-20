@@ -18,9 +18,13 @@ public:
     ~SettingsDialog();
 
 private slots:
-    void on_sizeSlider_valueChanged(int value);
+    void on_windowSizeSlider_valueChanged(int value);
 
     void on_fixPositionBox_clicked(bool checked);
+
+    void on_windowRatioBox_valueChanged(double arg1);
+
+    void on_cornerRatioBox_valueChanged(double arg1);
 
 private:
     Ui::SettingsDialog *ui;
@@ -30,6 +34,7 @@ private:
 signals:
     void setWindowSize();
     void setPositionFixed();
+    void setCornerSize();
 };
 
 #endif // SETTINGSDIALOG_H

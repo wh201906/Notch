@@ -1,5 +1,8 @@
 <RCC>
     <qresource prefix="/bg">
-        <file>res/notch.png</file>
+        <file>res/bl.png</file>
+        <file>res/br.png</file>
+        <file>res/tl.png</file>
+        <file>res/tr.png</file>
     </qresource>
 </RCC>
