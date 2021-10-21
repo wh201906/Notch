@@ -9,5 +9,5 @@ Inspired by [this project](https://github.com/megabitsenmzq/Notch-Simulator)
 
 ![Windows](previews/ubuntu.png)  
 
-Right click -> Settings to DIY your Notch
+Right click -> Settings to DIY your Notch  
 ![DIY](previews/diy.gif)  
