@@ -32,6 +32,8 @@ private slots:
     void setPositionFixed(); // use parameters in settings
     void setCornerSize(double ratio);
     void setCornerSize();
+    void setCursorHiding(bool isHiding);
+    void setCursorHiding();
 private:
     Ui::MainWindow *ui;
 

@@ -50,6 +50,7 @@ void MainWindow::initMenu()
         connect(&dialog, &SettingsDialog::setWindowSize, this, QOverload<>::of(&MainWindow::setWindowSize));
         connect(&dialog, &SettingsDialog::setCornerSize, this, QOverload<>::of(&MainWindow::setCornerSize));
         connect(&dialog, &SettingsDialog::setPositionFixed, this, QOverload<>::of(&MainWindow::setPositionFixed));
+        connect(&dialog, &SettingsDialog::setCursorHiding, this, QOverload<>::of(&MainWindow::setCursorHiding));
         dialog.exec();
     });
     connect(action_myInfo, &QAction::triggered, [ = ]()
@@ -145,7 +146,8 @@ void MainWindow::loadSettings()
     int defaultWindowSize = 8;
     double deaultWindowRatio = 6.0;
     double defaultCornerRatio = 0.25;
-    bool PositionFixed = false;
+    bool defaultPositionFixed = false;
+    bool defaultHideCursor = true;
     if(settings->value("WindowSize").isNull())
         settings->setValue("WindowSize", defaultWindowSize);
     if(settings->value("WindowRatio").isNull())
@@ -153,12 +155,15 @@ void MainWindow::loadSettings()
     if(settings->value("CornerRatio").isNull())
         settings->setValue("CornerRatio", defaultCornerRatio);
     if(settings->value("PositionFixed").isNull())
-        settings->setValue("PositionFixed", PositionFixed);
+        settings->setValue("PositionFixed", defaultPositionFixed);
+    if(settings->value("HideCursor").isNull())
+        settings->setValue("HideCursor", defaultHideCursor);
 
     // init by settings
     setWindowSize();
     setPositionFixed();
     setCornerSize();
+    setCursorHiding();
 }
 
 void MainWindow::setCornerSize(double ratio)
@@ -192,4 +197,17 @@ void MainWindow::setCornerSize(double ratio)
 void MainWindow::setCornerSize()
 {
     setCornerSize(settings->value("CornerRatio").toDouble());
+}
+
+void MainWindow::setCursorHiding(bool isHiding)
+{
+    if(isHiding)
+        setCursor(Qt::BlankCursor);
+    else
+        unsetCursor();
+}
+
+void MainWindow::setCursorHiding()
+{
+    setCursorHiding(settings->value("HideCursor").toBool());
 }

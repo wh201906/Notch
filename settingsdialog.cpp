@@ -36,6 +36,7 @@ void SettingsDialog::loadSettings()
     ui->windowRatioBox->setValue(settings->value("WindowRatio").toDouble());
     ui->cornerRatioBox->setValue(settings->value("CornerRatio").toDouble());
     ui->fixPositionBox->setChecked(settings->value("PositionFixed").toBool());
+    ui->hideCursorBox->setChecked(settings->value("HideCursor").toBool());
 }
 
 void SettingsDialog::on_windowRatioBox_valueChanged(double arg1)
@@ -49,5 +50,12 @@ void SettingsDialog::on_cornerRatioBox_valueChanged(double arg1)
 {
     settings->setValue("CornerRatio", arg1);
     emit setCornerSize();
+}
+
+
+void SettingsDialog::on_hideCursorBox_clicked(bool checked)
+{
+    settings->setValue("HideCursor", checked);
+    emit setCursorHiding();
 }
 

@@ -26,6 +26,8 @@ private slots:
 
     void on_cornerRatioBox_valueChanged(double arg1);
 
+    void on_hideCursorBox_clicked(bool checked);
+
 private:
     Ui::SettingsDialog *ui;
     QSettings* settings;
@@ -35,6 +37,7 @@ signals:
     void setWindowSize();
     void setPositionFixed();
     void setCornerSize();
+    void setCursorHiding();
 };
 
 #endif // SETTINGSDIALOG_H

@@ -11,3 +11,6 @@ Inspired by [this project](https://github.com/megabitsenmzq/Notch-Simulator)
 
 Right click -> Settings to DIY your Notch  
 ![DIY](previews/diy.gif)  
+
+Hide Cursor  
+![Cursor](previews/hidecursor.gif)  
