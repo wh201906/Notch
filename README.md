@@ -1,4 +1,5 @@
 # Notch
+![downloads](https://img.shields.io/github/downloads/wh201906/Notch/total)  
 
 The cheapest way to get the same experience as Macbook Pro 2021  
 Fully customizable  
